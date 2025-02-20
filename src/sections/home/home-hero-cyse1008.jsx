@@ -1,50 +1,56 @@
-import { useState } from 'react'; // Importing useState hook
-import Button from '@mui/material/Button'; // Importing Button component from Material-UI
-import Box from '@mui/material/Box'; // Importing Box component from Material-UI
-import { CounterDisplay } from './Counterdisplay'; // Importing the custom CounterDisplay component
+import { m } from 'framer-motion';
+
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import { useTheme } from '@mui/material/styles';
+
+import { textGradient } from 'src/theme/styles';
+
+import { ModularExponentiation } from './components/modular-exponentiation';
+import { ExtendedEuclideanAlgorithm } from './components/extended-euclidean-algorithm';
+
+const lgKey = 'lg';
 
 export function HomeHeroCYSE1008() {
-  // Declare a state variable to track the number of button clicks
-  const [clickCount, setClickCount] = useState(0);
-
-  // Define the onClick handler to update the count
-  const handleClick = () => {
-    setClickCount(clickCount + 1); // Increment the click count
-  };
-
+  const theme = useTheme();
   return (
-    <>
-      {/* Box component with title */}
-      <Box sx={{
-        backgroundColor: 'lightblue', // Light blue background color
-        padding: '40px',              // Padding around the content
-        textAlign: 'center',          // Centered text alignment
-        borderRadius: '12px',         // Rounded corners
-        fontSize: '2rem',             // Larger text size
-        fontWeight: 'bold',           // Bold text
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Subtle shadow effect
-        marginTop: '20px',            // Margin at the top
-      }} >
-        Run with me
-      </Box>
-
-      {/* Button component with onClick functionality */}
-      <Button
-        variant="contained"   // Button style set to "contained" for a solid background
-        color="primary"       // Applying the primary color theme
-        sx={{
-          marginTop: '20px',   // Adds space between the Box and Button
-          padding: '10px 20px', // Adds padding inside the button for a better size
-          fontSize: '1.2rem',  // Increases font size
-          borderRadius: '8px', // Rounds the corners of the button
-        }}
-        onClick={handleClick}  // Assign handleClick function to onClick event
-      >
-        Start Your Journey
-      </Button>
-
-      {/* Pass the clickCount state to the CounterDisplay component */}
-      <CounterDisplay clickCount={clickCount} />
-    </>
+  <Stack alignItems="center" spacing={2.5}>
+    <Box
+      component="h1"
+      display="flex"
+      flexWrap="wrap"
+      justifyContent="center"
+      sx={{
+        ...theme.typography.h2,
+        my: 0,
+        mx: 'auto',
+        maxWidth: 680,
+        fontFamily: theme.typography.fontSecondaryFamily,
+        [theme.breakpoints.up(lgKey)]: { fontSize: 72, lineHeight: '90px' },
+      }}
+    >
+    <Box
+      component={m.span}
+      animate={{ backgroundPosition: '200% center' }}
+      transition={{
+        duration: 20,
+        ease: 'linear',
+        repeat: Infinity,
+        repeatType: 'reverse',
+      }}
+      sx={{
+        ...textGradient(
+          `300deg, ${theme.vars.palette.primary.main} 0%, ${theme.vars.palette.warning.main} 25%, ${theme.vars.palette.primary.main} 50%, ${theme.vars.palette.warning.main} 75%, ${theme.vars.palette.primary.main} 100%`
+        ),
+        backgroundSize: '400%',
+        ml: { xs: 0.75, md: 1, xl: 1.5 },
+      }}
+    >
+      Welcome to Quilt
+    </Box>
+    </Box>
+    <ExtendedEuclideanAlgorithm />
+    <ModularExponentiation />
+  </Stack>
   );
 }

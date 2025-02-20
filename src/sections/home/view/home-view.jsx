@@ -37,7 +37,6 @@ export function HomeView() {
       <BackToTop />
 
       <HomeHeroCYSE1008 /> {/* Here I am!  This inserts this code here */}
-
       {/* <Stack sx={{ position: 'relative', bgcolor: 'background.default' }}>
         <HomeMinimal />
 
